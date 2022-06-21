@@ -1,0 +1,15 @@
+{{- if .Values.podDisruptionBudget.enabled -}}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  labels:
+    {{- include "aws-auth-operator.labels" . | nindent 4 }}
+    control-plane: controller-manager
+  name: {{ include "aws-auth-operator.fullname" . }}
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "aws-auth-operator.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
