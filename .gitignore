@@ -24,6 +24,9 @@ testbin/*
 *.swo
 *~
 
+# chart-releaser files
+.cr-release-packages/
+
 # delve debugger artifacts
 __debug_bin
 
