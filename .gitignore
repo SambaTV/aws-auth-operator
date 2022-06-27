@@ -1,0 +1,8 @@
+*.env
+*.out
+.cr-release-packages/
+bin/
+charts/
+dist/
+testbin/
+tmp/
