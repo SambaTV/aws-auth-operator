@@ -24,8 +24,9 @@ jobs:
         run: make lint test
 
       - name: Get app version
-        id: app_version
-        run: cat VERSION
+        id: get_app_version
+        run: |
+          echo "::set-output name=VERSION::$(cat VERSION)" 
 
       - name: release
         uses: actions/create-release@v1
@@ -33,7 +34,7 @@ jobs:
         with:
           draft: false
           prerelease: false
-          release_name: ${{ steps.app_version.outputs.result }}
+          release_name: ${{ steps.get_app_version.outputs.VERSION }}
           tag_name: ${{ github.ref }}
           body_path: CHANGELOG.md
         env:
@@ -78,14 +79,15 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Get app name
-        id: app_name
-        run: cat APP
+        id: get_app_name
+        run: |
+          echo "::set-output name=APP::$(cat APP)" 
 
       - name: Get chart version
         id: chart_version
         uses: mikefarah/yq@v4.19.1
         with:
-          cmd: yq eval '.version' './charts/${{ steps.app_name.outputs.result }}/Chart.yaml'
+          cmd: yq eval '.version' './charts/${{ steps.get_app_name.outputs.APP }}/Chart.yaml'
 
       - name: Install helm
         uses: azure/setup-helm@v1
