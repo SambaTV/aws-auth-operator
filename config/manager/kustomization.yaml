@@ -13,4 +13,4 @@ kind: Kustomization
 images:
 - name: controller
   newName: docker.io/sambatv/aws-auth-operator
-  newTag: 0.51.0
+  newTag: 0.52.0
