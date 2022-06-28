@@ -61,6 +61,18 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
+      - name: Get app name
+        id: app_name
+        uses: mikefarah/yq@v4.19.1
+        with:
+          cmd: yq eval '.name' './charts/metrics-server/Chart.yaml'
+
+      - name: Get chart version
+        id: chart_version
+        uses: mikefarah/yq@v4.19.1
+        with:
+          cmd: yq eval '.version' './charts/metrics-server/Chart.yaml'
+
       - name: Install helm
         uses: azure/setup-helm@v1
         with:
@@ -69,4 +81,5 @@ jobs:
       - name: Release chart
         uses: helm/chart-releaser-action@v1.4.0
         env:
+          CR_RELEASE_NAME_TEMPLATE: "{{ steps.app_name.outputs.result }}-chart-{{ steps.chart_version.outputs.result  }}"
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
