@@ -7,7 +7,7 @@ on:
       - 0.*
 
 jobs:
-  verify-app:
+  release-app:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -23,8 +23,25 @@ jobs:
       - name: Lint and test app
         run: make lint test
 
+      - name: Get app version
+        id: app_version
+        with:
+          cmd: cat VERSION
+
+      - name: release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: ${{ steps.app_version.outputs.result }}
+          tag_name: ${{ github.ref }}
+          body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
   release-image:
-    needs: verify-app
+    needs: release-app
     runs-on: ubuntu-latest
     steps:
       - id: repo_name
@@ -48,7 +65,7 @@ jobs:
           tags: ${{ steps.repo_name.outputs.lowercase }}:${{ github.ref_name }}
 
   release-chart:
-    needs: verify-app
+    needs: release-app
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -63,7 +80,6 @@ jobs:
 
       - name: Get app name
         id: app_name
-        uses: mikefarah/yq@v4.19.1
         with:
           cmd: cat APP
 
