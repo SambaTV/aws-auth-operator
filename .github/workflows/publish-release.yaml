@@ -65,7 +65,7 @@ jobs:
         id: app_name
         uses: mikefarah/yq@v4.19.1
         with:
-          cmd: yq eval '.name' './charts/${{ steps.app_name.outputs.result }}/Chart.yaml'
+          cmd: cat APP
 
       - name: Get chart version
         id: chart_version
@@ -81,5 +81,5 @@ jobs:
       - name: Release chart
         uses: helm/chart-releaser-action@v1.4.0
         env:
-          CR_RELEASE_NAME_TEMPLATE: "{{ steps.app_name.outputs.result }}-chart-{{ steps.chart_version.outputs.result }}"
+          CR_RELEASE_NAME_TEMPLATE: "${{ steps.app_name.outputs.result }}-chart-${{ steps.chart_version.outputs.result }}"
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
