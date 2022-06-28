@@ -25,8 +25,7 @@ jobs:
 
       - name: Get app version
         id: app_version
-        with:
-          cmd: cat VERSION
+        run: cat VERSION
 
       - name: release
         uses: actions/create-release@v1
@@ -80,8 +79,7 @@ jobs:
 
       - name: Get app name
         id: app_name
-        with:
-          cmd: cat APP
+        run: cat APP
 
       - name: Get chart version
         id: chart_version
