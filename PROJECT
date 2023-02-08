@@ -1,0 +1,23 @@
+domain: aws-auth.samba.tv
+layout:
+- go.kubebuilder.io/v3
+projectName: aws-auth-operator
+repo: github.com/sambatv/aws-auth-operator
+resources:
+- api:
+    crdVersion: v1
+  controller: true
+  domain: aws-auth.samba.tv
+  group: aws-auth.samba.tv
+  kind: MapRole
+  path: github.com/sambatv/aws-auth-operator/apis/v1beta1
+  version: v1beta1
+- api:
+    crdVersion: v1
+  controller: true
+  domain: aws-auth.samba.tv
+  group: aws-auth.samba.tv
+  kind: MapUser
+  path: github.com/sambatv/aws-auth-operator/apis/v1beta1
+  version: v1beta1
+version: "3"

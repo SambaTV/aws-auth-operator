@@ -1,0 +1,11 @@
+apiVersion: aws-auth.samba.tv/v1beta1
+kind: MapRole
+metadata:
+  name: sample
+spec:
+  rolearn: arn:aws:iam::123456789012:role/sample-maprole
+  groups:
+    - sample:group1
+    - sample:group2
+  description: A sample maprole
+  email: sample.user@example.com

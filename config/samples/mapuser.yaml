@@ -1,0 +1,10 @@
+apiVersion: aws-auth.samba.tv/v1beta1
+kind: MapUser
+metadata:
+  name: sample
+spec:
+  userarn: arn:aws:iam::123456789012:user/sample-mapuser
+  groups:
+    - sample:group
+  description: A sample mapuser
+  email: sample.user@example.com

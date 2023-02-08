@@ -1,0 +1,1 @@
+Kubernetes operator to declaratively manage the EKS aws-auth configmap
