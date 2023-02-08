@@ -36,5 +36,8 @@ dist/
 # dotenv files
 *.env
 
+# direnv files
+.envrc
+
 # Temporary files
 tmp/
