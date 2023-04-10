@@ -5,7 +5,7 @@
 replicaCount: 2
 
 image:
-  repository: docker.io/sambatv/aws-auth-operator
+  repository: ghcr.io/sambatv/aws-auth-operator
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
