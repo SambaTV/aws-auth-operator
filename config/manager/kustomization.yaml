@@ -13,4 +13,4 @@ kind: Kustomization
 images:
 - name: controller
   newName: ghcr.io/sambatv/aws-auth-operator
-  newTag: 0.61.3
+  newTag: 0.61.4
